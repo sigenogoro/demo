@@ -1,14 +1,10 @@
 package com.example.demo
 
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import com.example.demo.service.BookService
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
 import com.example.demo.entity.BookInformation
-
-import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.*
 
 
 @Controller
@@ -33,8 +29,20 @@ class BookController(private val bookInfoservice: BookService) {
 
     @GetMapping("/edit/{id}")
     fun edit(@PathVariable id: Long, model: Model): String {
-        val bookinfo_select = bookInfoservice.findOne(id)
-        model.addAttribute("bookdata", bookinfo_select)
+        val bookinfoSelect = bookInfoservice.findOne(id)
+        model.addAttribute("bookdata", bookinfoSelect)
         return "Book/edit"
+    }
+
+    @PostMapping("/update/{id}")
+    fun update(@PathVariable id: Long ,@ModelAttribute bookInformation: BookInformation): String{
+        bookInfoservice.save(bookInformation.copy(id= id))
+        return "redirect:/"
+    }
+
+    @PostMapping("/delete/{id}")
+    fun delete(@PathVariable id: Long): String{
+        bookInfoservice.delete(id)
+        return "redirect:/"
     }
 }

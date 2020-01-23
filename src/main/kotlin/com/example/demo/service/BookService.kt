@@ -11,7 +11,9 @@ class BookService(private val bookRepository: BookRepository){
 
     fun findOne(id: Long) = bookRepository.findById(id).orElse(null)
 
-    fun save(bookIn: BookInformation) = bookRepository.save(bookIn)
+    fun save(bookInfomation: BookInformation) = bookRepository.save(bookInfomation)
+
+    fun delete(id: Long) = bookRepository.deleteById(id)
 
 
 }

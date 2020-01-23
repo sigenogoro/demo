@@ -16,6 +16,9 @@
                 <td th:text="${data.title}"></td>
                 <td th:text="${data.done}"></td>
                 <td><a th:href="@{/edit/{id}(id=${data.id})}">Edit</a></td>
+                <form th:action="@{/delete/{id}(id=${data.id})}" th:method="POST">
+                    <td><input type="submit" value="削除"></td>
+                </form>
             </tr>
         </table>
         <p><a th:href="@{'/create_form'}">新規作成</a></p>
