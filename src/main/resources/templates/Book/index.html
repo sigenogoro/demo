@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <link th:href="@{/css/index.css}" rel="stylesheet" />
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Book_title</th>
+                <th>Finished reading</th>
+            </tr>
+            <tr th:each="data:${bookdata}">
+                <td th:text="${data.id}"></td>
+                <td th:text="${data.title}"></td>
+                <td th:text="${data.done}"></td>
+                <td><a th:href="@{/edit/{id}(id=${data.id})}">Edit</a></td>
+            </tr>
+        </table>
+        <p><a th:href="@{'/create_form'}">新規作成</a></p>
+    </body>
+</html>

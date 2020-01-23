@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link th:href="@{/css/index.css}" rel="stylesheet" />
+</head>
+<body>
+    <div class="contanier">
+        <h1>Edit</h1>
+        <form th:action="@{/update/{id}(id=${bookdata.id})}"  th:method="put">
+            <label>本のタイトル</label>
+            <input type="text" name="title" th:field="${bookdata.title}">
+            <button type="submit">作成</button>
+        </form>
+    </div>
+</body>
+</html>
