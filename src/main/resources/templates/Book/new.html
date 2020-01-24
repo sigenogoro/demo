@@ -7,7 +7,7 @@
 <body>
     <div class="contanier">
         <h1>New</h1>
-        <form th:action="@{/}" th:object="${bookdata}"  th:method="POST">
+        <form th:action="@{/new}" th:object="${bookdata}"  th:method="POST">
             <div class="form-group">
                 <label>本のタイトル</label>
                 <input type="text" name="title">

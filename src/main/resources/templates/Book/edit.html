@@ -7,9 +7,11 @@
 <body>
     <div class="contanier">
         <h1>Edit</h1>
-        <form th:action="@{/update/{id}(id=${bookdata.id})}"  th:method="put">
+        <form th:action="@{/update/{id}(id=*{id})}"  th:method="POST" th:object="${bookdata}">
             <label>本のタイトル</label>
+            <input type="hidden" th:field="*{id}">
             <input type="text" name="title" th:field="${bookdata.title}">
+            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
             <button type="submit">変更</button>
         </form>
     </div>

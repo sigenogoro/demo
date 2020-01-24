@@ -22,12 +22,10 @@ class BookController(private val bookInfoservice: BookService) {
     @GetMapping("/new")
     fun new(model: Model): String{
         model.addAttribute("bookdata", BookInformation())
-        println("---------########")
-        println(model)
         return "Book/new"
     }
 
-    @PostMapping
+    @PostMapping("/new")
     fun create(@Validated  @ModelAttribute("bookdata") bookdata: BookInformation, bindingResult: BindingResult, model: Model): String{
         if(bindingResult.hasErrors()){
             return "Book/new"
@@ -44,11 +42,11 @@ class BookController(private val bookInfoservice: BookService) {
     }
 
     @PostMapping( "/update/{id}")
-    fun update(@PathVariable id: Long, @Validated @ModelAttribute bookInformation: BookInformation, bindingResult: BindingResult): String{
+    fun update(@PathVariable id: Long, @Validated @ModelAttribute("bookdata") bookdata: BookInformation, bindingResult: BindingResult): String{
         if(bindingResult.hasErrors()){
             return "Book/edit"
         }
-        bookInfoservice.save(bookInformation.copy(id= id))
+        bookInfoservice.save(bookdata.copy(id= id))
         return "redirect:/"
     }
     @PostMapping("/delete/{id}")
