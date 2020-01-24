@@ -34,15 +34,26 @@ class BookController(private val bookInfoservice: BookService) {
         return "Book/edit"
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping( "/update/{id}")
     fun update(@PathVariable id: Long ,@ModelAttribute bookInformation: BookInformation): String{
         bookInfoservice.save(bookInformation.copy(id= id))
         return "redirect:/"
     }
-
     @PostMapping("/delete/{id}")
     fun delete(@PathVariable id: Long): String{
         bookInfoservice.delete(id)
         return "redirect:/"
+    }
+
+    @GetMapping("/search/")
+    fun searchData(model: Model, @RequestParam keyword: String): String{
+        if(keyword.isEmpty()){
+            val bookinfo = bookInfoservice.findAll()
+            model.addAttribute("bookdata", bookinfo)
+        }else{
+            val bookInfo = bookInfoservice.search(keyword)
+            model.addAttribute("bookdata", bookInfo)
+        }
+        return "Book/index"
     }
 }

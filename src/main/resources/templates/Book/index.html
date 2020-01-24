@@ -5,6 +5,10 @@
         <link th:href="@{/css/index.css}" rel="stylesheet" />
     </head>
     <body>
+    <form th:action="@{/search/}" th:method="get">
+        <input type="text" name="keyword">
+        <span><input type="submit" value="search"></span>
+    </form>
         <table>
             <tr>
                 <th>Id</th>

@@ -2,10 +2,13 @@ package com.example.demo.service
 
 import com.example.demo.entity.BookInformation
 import com.example.demo.repository.BookRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class BookService(private val bookRepository: BookRepository){
+
+
 
     fun findAll()  = bookRepository.findAll()
 
@@ -15,5 +18,6 @@ class BookService(private val bookRepository: BookRepository){
 
     fun delete(id: Long) = bookRepository.deleteById(id)
 
+    fun search(name: String) = bookRepository.findByTitleLike(name)
 
 }
