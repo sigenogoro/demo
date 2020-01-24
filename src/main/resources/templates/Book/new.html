@@ -7,10 +7,13 @@
 <body>
     <div class="contanier">
         <h1>New</h1>
-        <form th:action="@{/}" th:method="POST">
-            <label>本のタイトル</label>
-            <input type="text" name="title">
-            <button type="submit">作成</button>
+        <form th:action="@{/}" th:object="${bookdata}"  th:method="POST">
+            <div class="form-group">
+                <label>本のタイトル</label>
+                <input type="text" name="title">
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+                <button type="submit">作成</button>
+            </div>
         </form>
     </div>
 </body>

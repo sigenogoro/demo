@@ -1,6 +1,8 @@
 package com.example.demo.entity
 
 import javax.persistence.*
+import javax.validation.constraints.NotBlank
+
 
 @Entity
 @Table(name="Book_info")
@@ -9,9 +11,8 @@ data class BookInformation(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Column(name="title", nullable = false)
+    @get:NotBlank
     val title: String = "",
 
-    @Column(name="done", nullable = false)
     val done: Boolean = false
 )
