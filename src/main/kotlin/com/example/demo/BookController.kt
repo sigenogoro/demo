@@ -25,6 +25,8 @@ class BookController(private val bookInfoservice: BookService) {
         return "Book/new"
     }
 
+
+
     @PostMapping("/new")
     fun create(@Validated  @ModelAttribute("bookdata") bookdata: BookInformation, bindingResult: BindingResult, model: Model): String{
         if(bindingResult.hasErrors()){
