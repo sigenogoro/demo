@@ -36,7 +36,7 @@
             </tr>
             <tr th:each="data:${bookdata}">
                 <td th:text="${data.id}"></td>
-                <td th:text="${data.title}"></td>
+                <td><a th:href="@{/{id}(id=${data.id})}"><span th:text="${data.title}"></span></a></td>
                 <td th:text="${data.done}"></td>
                 <td><a th:href="@{/edit/{id}(id=${data.id})}">Edit</a></td>
                 <form th:action="@{/delete/{id}(id=${data.id})}" th:method="POST">

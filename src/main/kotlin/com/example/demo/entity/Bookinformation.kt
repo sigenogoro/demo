@@ -1,9 +1,11 @@
 package com.example.demo.entity
 
 
+import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
+
 
 
 @Entity
@@ -11,7 +13,7 @@ import javax.validation.constraints.NotBlank
 data class BookInformation(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    val id: Long? = null,
 
     @get:NotBlank
     val title: String = "",
@@ -20,11 +22,16 @@ data class BookInformation(
 
     val impression: String = "",
 
-    val startdate: LocalDate = LocalDate.now(),
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    val startdate: LocalDate? = null,
 
-    val enddate: LocalDate = LocalDate.now(),
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    val enddate: LocalDate? = null,
 
-    val genre: String = ""
-
+    val genre: String? = null
 
 )
+
+fun getstartdate(startdate: LocalDate?): LocalDate? {
+    return startdate
+}

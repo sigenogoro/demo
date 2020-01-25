@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import com.example.demo.service.BookService
 import com.example.demo.entity.BookInformation
+import com.example.demo.entity.getstartdate
+import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
@@ -32,6 +34,9 @@ class BookController(private val bookInfoservice: BookService) {
         if(bindingResult.hasErrors()){
             return "Book/new"
         }
+        println("------")
+        println(bookdata)
+        println(getstartdate(bookdata.startdate))
         bookInfoservice.save(bookdata)
         return "redirect:/"
     }
