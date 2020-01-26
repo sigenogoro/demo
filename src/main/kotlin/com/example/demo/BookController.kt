@@ -27,6 +27,13 @@ class BookController(private val bookInfoservice: BookService) {
         return "Book/new"
     }
 
+    @GetMapping("/show/{id}")
+    fun show(@PathVariable id: Long, model: Model): String {
+        val bookSelect = bookInfoservice.findOne(id)
+        model.addAttribute("bookdata", bookSelect)
+        return "Book/show"
+    }
+
 
 
     @PostMapping("/new")
@@ -34,9 +41,6 @@ class BookController(private val bookInfoservice: BookService) {
         if(bindingResult.hasErrors()){
             return "Book/new"
         }
-        println("------")
-        println(bookdata)
-        println(getstartdate(bookdata.startdate))
         bookInfoservice.save(bookdata)
         return "redirect:/"
     }
