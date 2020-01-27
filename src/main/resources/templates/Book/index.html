@@ -11,14 +11,14 @@
     <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
-            <a class='navbar-brand' th:href=@{"/index"}>ReadBook</a>
+            <a class='navbar-brand' th:href=@{"/"}>ReadBook</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a th:href="@{'/new'}" class="nav-link">新規作成</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/index}" class="nav-link">一覧画面</a>
+                        <a th:href="@{/}" class="nav-link">一覧画面</a>
                     </li>
                 </ul>
             </div>
@@ -28,11 +28,11 @@
         <input type="text" name="keyword">
         <span><input type="submit" value="search"></span>
     </form>
-        <table>
+        <table class="table">
             <tr>
-                <th>Id</th>
-                <th>Book_title</th>
-                <th>Finished reading</th>
+                <th scope="col"></th>
+                <th scope="col">本のタイトル</th>
+                <th scope="col">読了</th>
             </tr>
             <tr th:each="data:${bookdata}">
                 <td th:text="${data.id}"></td>

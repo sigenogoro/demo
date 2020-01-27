@@ -8,10 +8,31 @@
     <div class="contanier">
         <h1>Edit</h1>
         <form th:action="@{/update/{id}(id=*{id})}"  th:method="POST" th:object="${bookdata}">
-            <label>本のタイトル</label>
-            <input type="hidden" th:field="*{id}">
-            <input type="text" name="title" th:field="${bookdata.title}">
-            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+            <div class="form-group">
+                <label>本のタイトル</label>
+                <input type="text" name="title" th:field="*{title}">
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+            </div>
+            <div class="form-group">
+                <label>感想・学んだこと</label>
+                <input type="text" name="impression" th:field="*{impression}">
+            </div>
+            <div class="form-group">
+                <label>読み始めた日</label>
+                <input type="date" name="startdate" th:field="*{startdate}">
+            </div>
+            <div class="form-group">
+                <label>読み終えた日</label>
+                <input type="date" name="enddate" th:field="*{enddate}">
+            </div>
+            <div class="form-group">
+                <label>ジャンル</label>
+                <input type="text" name="genre" th:field="*{genre}">
+            </div>
+            <div class="form-group">
+                <label>読み切った</label>
+                <input type="checkbox" name="done" th:field="*{done}">
+            </div>
             <button type="submit">変更</button>
         </form>
     </div>
