@@ -24,18 +24,17 @@
             </div>
         </nav>
     </header>
-    <table>
-        <tr>
-            <th>Book_title</th>
-            <th>Finished reading</th>
-        </tr>
-        <tr th:each="data:${bookdata}">
-            <td th:text="${data.title}"></td>
-            <td th:text="${data.done}"></td>
-            <td th:text="${data.startdate}"></td>
-            <td th:text="${data.enddate}"></td>
-            <td th:text="${data.genre}"></td>
-        </tr>
-    </table>
+    <div class="continer" th:object="${bookdata}">
+        <label>Title</label>
+        <p th:text="*{title}"></p>
+        <label>感想(impression)</label>
+        <p th:text="*{impression}"></p>
+        <label>始めた日</label>
+        <p th:text="*{startdate}"></p>
+        <label>終わる日</label>
+        <p th:text="*{enddate}"></p>
+        <label>ジャンル</label>
+        <p th:text="*{genre}"></p>
+    </div>
 </body>
 </html>
