@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*
 class BookController(private val bookInfoservice: BookService) {
     @GetMapping("/")
     fun index(model: Model): String {
-        val bookinfo = bookInfoservice.findAll()
+        val bookinfo = bookInfoservice.findAll().filterIndexed{idx, item -> idx < 5}
         model.addAttribute("bookdata", bookinfo)
         return "Book/index"
     }
