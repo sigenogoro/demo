@@ -4,20 +4,21 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import com.example.demo.service.BookService
 import com.example.demo.entity.BookInformation
-import com.example.demo.entity.getstartdate
-import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
-
+import org.springframework.data.domain.Pageable
 
 
 @Controller
 class BookController(private val bookInfoservice: BookService) {
     @GetMapping("/")
-    fun index(model: Model): String {
-        val bookinfo = bookInfoservice.findAll().filterIndexed{idx, item -> idx < 5}
+    fun index(model: Model, pageable: Pageable): String {
+
+        val bookinfo = bookInfoservice.getfindAll(pageable)
         model.addAttribute("bookdata", bookinfo)
+
+        println(bookinfo)
         return "Book/index"
     }
 
@@ -69,12 +70,14 @@ class BookController(private val bookInfoservice: BookService) {
     @GetMapping("/search/")
     fun searchData(model: Model, @RequestParam keyword: String): String{
         if(keyword.isEmpty()){
-            val bookinfo = bookInfoservice.findAll()
-            model.addAttribute("bookdata", bookinfo)
+            return "redirect:/"
         }else{
             val bookInfo = bookInfoservice.search(keyword)
             model.addAttribute("bookdata", bookInfo)
         }
         return "Book/index"
     }
+
+
+
 }
