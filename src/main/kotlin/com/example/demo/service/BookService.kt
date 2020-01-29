@@ -8,8 +8,8 @@ import org.springframework.data.domain.Pageable
 
 @Service
 class BookService(private val bookRepository: BookRepository){
-    val i = PageRequest.of(0, 5)
-    fun getfindAll(pageable: Pageable) = bookRepository.findAll(i)
+
+    fun getfindAll(pageable: Pageable) = bookRepository.findAll(PageRequest.of(pageable.pageNumber, 5))
 
     fun findOne(id: Long) = bookRepository.findById(id).orElse(null)
 

@@ -17,8 +17,7 @@ class BookController(private val bookInfoservice: BookService) {
 
         val bookinfo = bookInfoservice.getfindAll(pageable)
         model.addAttribute("bookdata", bookinfo)
-
-        println(bookinfo)
+        
         return "Book/index"
     }
 

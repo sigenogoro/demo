@@ -34,6 +34,7 @@
                 <th scope="col">本のタイトル</th>
                 <th scope="col">読了</th>
             </tr>
+<!--            TODO ページネーションができるようにする -->
             <tr th:each="data:${bookdata}">
                 <td th:text="${data.id}"></td>
                 <td><a th:href="@{/show/{id}(id=${data.id})}"><span th:text="${data.title}"></span></a></td>
@@ -44,5 +45,24 @@
                 </form>
             </tr>
         </table>
+    <div th:fragment='pagination'>
+        <ul>
+            <li th:class="${bookdata.first}" style="display:inline">
+                <span th:if="${bookdata.first}">←先頭</span>
+                <a th:if="${not bookdata.first}" th:href="@{${url}(page=0)}">←先頭</a>
+            </li>
+            <li th:each='i : ${#numbers.sequence(0, bookdata.totalPages-1)}' th:class="(${i}==${bookdata.number})? 'active' : ''" style="display:inline">
+                <span th:if='${i}==${bookdata.number}' th:text='${i+1}'>1</span>
+                <a th:href="@{${url}(page=${i})}">
+                    <span th:text='${i+1}'>1</span>
+                </a>
+            </li>
+            <li th:class="${bookdata.last}" style="display:inline">
+                <span th:if="${bookdata.last}">末尾➝</span>
+                <a th:if="${not bookdata.last}" th:href="@{${url}(page=(${bookdata.totalPages}-1))}">末尾➝</a>
+            </li>
+
+        </ul>
+    </div>
     </body>
 </html>
