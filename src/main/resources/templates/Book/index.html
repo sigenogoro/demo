@@ -53,8 +53,8 @@
             </li>
             <li th:each='i : ${#numbers.sequence(0, bookdata.totalPages-1)}' th:class="(${i}==${bookdata.number})? 'active' : ''" style="display:inline">
                 <span th:if='${i}==${bookdata.number}' th:text='${i+1}'>1</span>
-                <a th:href="@{${url}(page=${i})}">
-                    <span th:text='${i+1}'>1</span>
+                <a th:if="${bookdata.number} != ${i}" th:href="@{${url}(page=${i})}">
+                    <span th:text='${i+1}'></span>
                 </a>
             </li>
             <li th:class="${bookdata.last}" style="display:inline">
