@@ -20,21 +20,22 @@
                     <li class="nav-item">
                         <a th:href="@{/}" class="nav-link">一覧画面</a>
                     </li>
+                    <li class="nav-item">
+                        <form th:action="@{/search/}" th:method="get" class="nav-link">
+                            <input type="text" name="keyword">
+                            <span><input type="submit" value="search"></span>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
-    <form th:action="@{/search/}" th:method="get">
-        <input type="text" name="keyword">
-        <span><input type="submit" value="search"></span>
-    </form>
         <table class="table">
             <tr>
                 <th scope="col"></th>
                 <th scope="col">本のタイトル</th>
                 <th scope="col">読了</th>
             </tr>
-<!--            TODO ページネーションができるようにする -->
             <tr th:each="data:${bookdata}">
                 <td th:text="${data.id}"></td>
                 <td><a th:href="@{/show/{id}(id=${data.id})}"><span th:text="${data.title}"></span></a></td>
@@ -45,7 +46,7 @@
                 </form>
             </tr>
         </table>
-    <div th:fragment='pagination'>
+    <div th:if="${bookdata}" th:fragment='pagination'>
         <ul>
             <li th:class="${bookdata.first}" style="display:inline">
                 <span th:if="${bookdata.first}">←先頭</span>
@@ -53,7 +54,7 @@
             </li>
             <li th:each='i : ${#numbers.sequence(0, bookdata.totalPages-1)}' th:class="(${i}==${bookdata.number})? 'active' : ''" style="display:inline">
                 <span th:if='${i}==${bookdata.number}' th:text='${i+1}'>1</span>
-                <a th:if="${bookdata.number} != ${i}" th:href="@{${url}(page=${i})}">
+                <a th:if="${bookdata.number} != ${i}" th:href="@{${url}(page=${i},keyword=${param.keyword})}">
                     <span th:text='${i+1}'></span>
                 </a>
             </li>
@@ -61,7 +62,6 @@
                 <span th:if="${bookdata.last}">末尾➝</span>
                 <a th:if="${not bookdata.last}" th:href="@{${url}(page=(${bookdata.totalPages}-1))}">末尾➝</a>
             </li>
-
         </ul>
     </div>
     </body>

@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import org.springframework.data.domain.Pageable
+import javax.websocket.server.PathParam
 
 
 @Controller
@@ -17,7 +18,6 @@ class BookController(private val bookInfoservice: BookService) {
 
         val bookinfo = bookInfoservice.getfindAll(pageable)
         model.addAttribute("bookdata", bookinfo)
-
         return "Book/index"
     }
 
@@ -67,12 +67,13 @@ class BookController(private val bookInfoservice: BookService) {
     }
 
     @GetMapping("/search/")
-    fun searchData(model: Model, @RequestParam keyword: String): String{
+    fun searchData(model: Model, @RequestParam keyword: String, pageable: Pageable): String{
         if(keyword.isEmpty()){
             return "redirect:/"
         }else{
-            val bookInfo = bookInfoservice.search(keyword)
+            val bookInfo = bookInfoservice.search(keyword, pageable)
             model.addAttribute("bookdata", bookInfo)
+            println(bookInfo.toList())
         }
         return "Book/index"
     }
