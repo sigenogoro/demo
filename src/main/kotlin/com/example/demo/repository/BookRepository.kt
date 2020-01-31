@@ -15,4 +15,6 @@ interface BookRepository: JpaRepository<BookInformation, Long>{
     fun findByTitleLike(@Param("keyword") keyword: String, pageable: Pageable): Page<BookInformation>
 
     override fun findAll(pageable: Pageable): Page<BookInformation>
+
+    fun findByDone(@Param("bool") bool: Boolean, pageable: Pageable): Page<BookInformation>
 }

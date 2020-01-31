@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable
 
 
 @Service
-class BookService(private val bookRepository: BookRepository){
+class BookService(private val bookRepository: BookRepository) {
 
 
     fun getfindAll(pageable: Pageable) = bookRepository.findAll(PageRequest.of(pageable.pageNumber, 5))
@@ -21,6 +21,9 @@ class BookService(private val bookRepository: BookRepository){
 
     fun search(name: String, pageable: Pageable) = bookRepository.findByTitleLike("%$name%", PageRequest.of(pageable.pageNumber, 10))
 
+    fun findBydone(bool: Boolean, pageable: Pageable) = bookRepository.findByDone(bool, PageRequest.of(pageable.pageNumber, 10))
 
 }
+
+
 

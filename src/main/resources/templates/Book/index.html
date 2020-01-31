@@ -26,6 +26,15 @@
                             <span><input type="submit" value="search"></span>
                         </form>
                     </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button type="button" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">読書状況</button>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item"  th:href="@{/searchBool/{bool}(bool=false)}">未読了</a>
+                                <a class="dropdown-item" th:href="@{/searchBool/{bool}(bool=true)}">読了</a>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -66,3 +75,4 @@
     </div>
     </body>
 </html>
+

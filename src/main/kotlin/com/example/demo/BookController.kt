@@ -15,7 +15,6 @@ import javax.websocket.server.PathParam
 class BookController(private val bookInfoservice: BookService) {
     @GetMapping("/")
     fun index(model: Model, pageable: Pageable): String {
-
         val bookinfo = bookInfoservice.getfindAll(pageable)
         model.addAttribute("bookdata", bookinfo)
         return "Book/index"
@@ -73,8 +72,14 @@ class BookController(private val bookInfoservice: BookService) {
         }else{
             val bookInfo = bookInfoservice.search(keyword, pageable)
             model.addAttribute("bookdata", bookInfo)
-            println(bookInfo.toList())
         }
+        return "Book/index"
+    }
+
+    @GetMapping("/searchBool/{bool}")
+    fun searchBool(model: Model, @PathVariable bool:Boolean, pageable: Pageable): String{
+        val bookInfo = bookInfoservice.findBydone(bool, pageable)
+        model.addAttribute("bookdata", bookInfo)
         return "Book/index"
     }
 
