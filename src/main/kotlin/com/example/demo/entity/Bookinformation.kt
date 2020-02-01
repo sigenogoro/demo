@@ -3,7 +3,6 @@ package com.example.demo.entity
 
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
-import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
@@ -12,27 +11,24 @@ import javax.validation.constraints.NotBlank
 @Entity
 @Table(name="Book_info")
 data class BookInformation(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        val id: Long? = null,
 
-    @get:NotBlank
-    val title: String = "",
+        @get:NotBlank
+        val title: String = "",
 
-    val done: Boolean = false,
+        val done: Boolean = false,
 
-    val impression: String = "",
+        val impression: String = "",
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    val startdate: LocalDate? = null,
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        val startdate: LocalDate? = null,
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    val enddate: LocalDate? = null,
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        val enddate: LocalDate? = null,
 
-    val genre: String? = null
+        val genre: String? = null
 
 )
 
-fun getstartdate(startdate: LocalDate?): LocalDate? {
-    return startdate
-}

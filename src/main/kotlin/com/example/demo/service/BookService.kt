@@ -2,9 +2,11 @@ package com.example.demo.service
 
 import com.example.demo.entity.BookInformation
 import com.example.demo.repository.BookRepository
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import org.springframework.data.domain.Pageable
+import org.springframework.data.jpa.repository.Query
 
 
 @Service
@@ -23,6 +25,15 @@ class BookService(private val bookRepository: BookRepository) {
 
     fun findBydone(bool: Boolean, pageable: Pageable) = bookRepository.findByDone(bool, PageRequest.of(pageable.pageNumber, 10))
 
+    fun allegretto() = bookRepository.genotype()
+
+    fun findBygenre(genre: String, pageable: Pageable) :Page<BookInformation>{
+        if(genre == "その他"){
+            val airgenre = ""
+            return bookRepository.findByGenre(airgenre, PageRequest.of(pageable.pageNumber, 10))
+        }
+        return bookRepository.findByGenre(genre, PageRequest.of(pageable.pageNumber, 10))
+    }
 }
 
 

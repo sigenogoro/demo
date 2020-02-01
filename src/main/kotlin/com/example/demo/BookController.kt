@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import org.springframework.data.domain.Pageable
-import javax.websocket.server.PathParam
 
 
 @Controller
@@ -16,7 +15,11 @@ class BookController(private val bookInfoservice: BookService) {
     @GetMapping("/")
     fun index(model: Model, pageable: Pageable): String {
         val bookinfo = bookInfoservice.getfindAll(pageable)
+        val changeposi = bookInfoservice.allegretto().distinct().indexOf("")
+        var genretype = bookInfoservice.allegretto().distinct().toMutableList()
+        genretype[changeposi] = "その他"
         model.addAttribute("bookdata", bookinfo)
+        model.addAttribute("hello", genretype)
         return "Book/index"
     }
 
@@ -81,6 +84,19 @@ class BookController(private val bookInfoservice: BookService) {
         val bookInfo = bookInfoservice.findBydone(bool, pageable)
         model.addAttribute("bookdata", bookInfo)
         return "Book/index"
+    }
+
+    @GetMapping("/searchGenre/{genre}")
+    fun searchGenre(model: Model, pageable: Pageable, @PathVariable genre: String): String{
+        val bookinfo = bookInfoservice.findBygenre(genre, pageable)
+        val changeposi = bookInfoservice.allegretto().distinct().indexOf("")
+        var genretype = bookInfoservice.allegretto().distinct().toMutableList()
+        genretype[changeposi] = "その他"
+        model.addAttribute("bookdata", bookinfo)
+        model.addAttribute("hello", genretype)
+
+        return "Book/index"
+
     }
 
 
