@@ -17,9 +17,13 @@ class BookController(private val bookInfoservice: BookService) {
         val bookinfo = bookInfoservice.getfindAll(pageable)
         val changeposi = bookInfoservice.allegretto().distinct().indexOf("")
         var genretype = bookInfoservice.allegretto().distinct().toMutableList()
-        genretype[changeposi] = "その他"
+        if(changeposi != -1){
+            genretype[changeposi] = "その他"
+        }
+
         model.addAttribute("bookdata", bookinfo)
         model.addAttribute("hello", genretype)
+
         return "Book/index"
     }
 
@@ -91,7 +95,9 @@ class BookController(private val bookInfoservice: BookService) {
         val bookinfo = bookInfoservice.findBygenre(genre, pageable)
         val changeposi = bookInfoservice.allegretto().distinct().indexOf("")
         var genretype = bookInfoservice.allegretto().distinct().toMutableList()
-        genretype[changeposi] = "その他"
+        if(changeposi != -1){
+            genretype[changeposi] = "その他"
+        }
         model.addAttribute("bookdata", bookinfo)
         model.addAttribute("hello", genretype)
 
