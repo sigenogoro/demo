@@ -6,14 +6,14 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import org.springframework.data.domain.Pageable
-
+import org.springframework.data.domain.Sort
 
 
 @Service
 class BookService(private val bookRepository: BookRepository) {
 
 
-    fun getfindAll(pageable: Pageable) = bookRepository.findAll(PageRequest.of(pageable.pageNumber, 5))
+    fun getfindAll(pageable: Pageable) = bookRepository.findAll(PageRequest.of(pageable.pageNumber, 5, Sort.by("startdate").descending()))
 
     fun findOne(id: Long) = bookRepository.findById(id).orElse(null)
 
@@ -32,7 +32,7 @@ class BookService(private val bookRepository: BookRepository) {
             val airgenre = ""
             return bookRepository.findByGenre(airgenre, PageRequest.of(pageable.pageNumber, 10))
         }
-        return bookRepository.findByGenre(genre, PageRequest.of(pageable.pageNumber, 10))
+        return bookRepository.findByGenre(genre, PageRequest.of(pageable.pageNumber, 10, Sort.by("startdate").descending()))
     }
 }
 

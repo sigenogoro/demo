@@ -28,9 +28,9 @@ data class BookInformation(
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         val enddate: LocalDate? = null,
 
-
-//        @Column(nullable = false) -> エラーとなっている。Mysql単独でgenreを削除したからかもしれない。SQLの中に入れるかもしれない。やってみて！
         val genre: String? = ""
+
+
 
 )
 
