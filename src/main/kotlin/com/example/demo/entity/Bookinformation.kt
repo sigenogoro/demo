@@ -1,11 +1,14 @@
 package com.example.demo.entity
 
 
+
 import org.springframework.format.annotation.DateTimeFormat
+
 import java.time.LocalDate
 import javax.persistence.*
+import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
-
+import javax.validation.constraints.Size
 
 
 @Entity
@@ -15,7 +18,7 @@ data class BookInformation(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long? = null,
 
-        @get:NotBlank
+        @NotBlank
         val title: String = "",
 
         val done: Boolean = false,
@@ -30,7 +33,33 @@ data class BookInformation(
 
         val genre: String? = ""
 
+)
+
+@Entity
+@Table(name="users")
+data class User(
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        val id: Long? = null,
+
+        @NotBlank
+        @Column(nullable = false)
+        val nickname: String = "",
+
+        @NotBlank
+        @Size(min=10)
+        @Column(nullable = false)
+        var password: String? = "",
+
+        @NotBlank
+        @Email
+        @Column(nullable = false)
+        val email:String = ""
+
+
 
 
 )
+
+
 

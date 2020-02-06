@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import com.example.demo.service.BookService
 import com.example.demo.entity.BookInformation
+import com.example.demo.entity.User
+import com.example.demo.service.UserSerive
 import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
@@ -11,7 +13,28 @@ import org.springframework.data.domain.Pageable
 
 
 @Controller
-class BookController(private val bookInfoservice: BookService) {
+class BookController(private val bookInfoservice: BookService, private val userSerive: UserSerive) {
+
+
+
+    @GetMapping("/login")
+    fun loginForm(): String{
+        return "Book/login"
+    }
+
+    @PostMapping("/signup")
+    fun loginCheck(user: User, bindingResult: BindingResult): String{
+
+        if(bindingResult.hasErrors()){
+            return "Book/signup"
+        }
+        userSerive.create(user, user.password)
+        return "Book/login"
+    }
+
+
+
+
     @GetMapping("/")
     fun index(model: Model, pageable: Pageable): String {
         val bookinfo = bookInfoservice.getfindAll(pageable)
